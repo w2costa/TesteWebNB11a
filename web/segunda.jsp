@@ -9,9 +9,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Segunda</title>
     </head>
     <body>
-        <h1>Segunda</h1>
+        <h1>Cadastro</h1>
+        <p>Nome: <%= request.getParameter("nome") %></p>
+        <p>Endereço: <%= request.getParameter("endereco") %></p>
     </body>
 </html>
