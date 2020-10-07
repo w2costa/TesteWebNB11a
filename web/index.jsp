@@ -12,21 +12,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <p> 
-            <%
-                for (int i = 1; i <= 10; i++) {
-                    %>
-                    valor = 
-                    <%
-
-                    out.println( i);
-            %>
-            <br>
-            <%
-                }
-
-            %>
-        </p>
+        <h1>Formulário</h1>
+        <form method="get" action="segunda.jsp">
+            Nome: <input type="text" name="nome"><br>
+            Endereço: <input type="text" name="endereco"><br>
+            <input type="submit" value="Enviar" name="enviar" ><br>
+        </form>
+        <a href="segunda.jsp">Segunda página</a>
     </body>
 </html>
