@@ -12,8 +12,11 @@
         <title>Segunda</title>
     </head>
     <body>
+        <jsp:useBean id="cliente" scope="request" class="entidade.Cliente" />
+        <jsp:setProperty name="cliente" property="nome" />
+        <jsp:setProperty name="cliente" property="endereco" />
         <h1>Cadastro</h1>
-        <p>Nome: <%= request.getParameter("nome") %></p>
-        <p>Endereço: <%= request.getParameter("endereco") %></p>
+        <p>Nome: <jsp:getProperty name="cliente" property="nome" /></p>
+        <p>Endereço: <jsp:getProperty name="cliente" property="endereco" /></p>
     </body>
 </html>
