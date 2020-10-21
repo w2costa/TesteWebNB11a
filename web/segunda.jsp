@@ -4,17 +4,11 @@
     Author     : Wilson Wolf Costa <wilson.w.costa@gmail.com>
 --%>
 
-<%@page import="javax.persistence.Persistence"%>
-<%@page import="javax.persistence.EntityManager"%>
-<%@page import="javax.persistence.EntityManagerFactory"%>
+<%@page import="controle.ClienteJpaController"%>
+<%@page import="controle.JpaUtil"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%!
-    EntityManagerFactory emf;
-    EntityManager em;
-%>
 <%
-    emf = Persistence.createEntityManagerFactory("default");
-    em = emf.createEntityManager();
+    ClienteJpaController clienteDAO = new ClienteJpaController(JpaUtil.getEmf());
 %>
 <!DOCTYPE html>
 <html>
@@ -28,10 +22,7 @@
         <jsp:setProperty name="cliente" property="id" />
         <h1>Cadastro</h1>
         <%
-            em.getTransaction().begin();
-            em.persist(cliente);
-            em.getTransaction().commit();
-            em.close();
+            clienteDAO.create(cliente);
         %>
         <p>Id: <jsp:getProperty name="cliente" property="id" /></p>
         <p>Nome: <jsp:getProperty name="cliente" property="nome" /></p>

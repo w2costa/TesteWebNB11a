@@ -4,18 +4,12 @@
     Author     : Wilson Wolf Costa <wilson.w.costa@gmail.com>
 --%>
 
+<%@page import="controle.ClienteJpaController"%>
+<%@page import="controle.JpaUtil"%>
 <%@page import="entidade.Cliente"%>
-<%@page import="javax.persistence.Persistence"%>
-<%@page import="javax.persistence.EntityManager"%>
-<%@page import="javax.persistence.EntityManagerFactory"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%!
-    EntityManagerFactory emf;
-    EntityManager em;
-%>
 <%
-    emf = Persistence.createEntityManagerFactory("default");
-    em = emf.createEntityManager();
+    ClienteJpaController clienteDAO = new ClienteJpaController(JpaUtil.getEmf());
 %>
 <!DOCTYPE html>
 <html>
@@ -32,15 +26,10 @@
         <h1>Excluir cliente</h1>
         
         <%
-            //int id = Integer.parseInt(request.getParameter("id"));
-            //Cliente c = em.find(Cliente.class, id);
-            Cliente c = em.find(Cliente.class, cliente.getId());
-            em.getTransaction().begin();
-            em.remove(c);
-            em.getTransaction().commit();
+            clienteDAO.destroy(cliente.getId());
         %>
-        O cliente id:<%= c.getId() %> - nome: <%= c.getNome() %> foi excluido.
-
+        O cliente id: ${cliente.id} - nome: ${cliente.nome} foi excluido.
+                  
 
     </body>
 </html>

@@ -4,24 +4,16 @@
     Author     : Wilson Wolf Costa <wilson.w.costa@gmail.com>
 --%>
 
+<%@page import="controle.ClienteJpaController"%>
+<%@page import="controle.JpaUtil"%>
 <%@page import="java.util.List"%>
 <%@page import="javax.persistence.TypedQuery"%>
 <%@page import="entidade.Cliente"%>
-<%@page import="javax.persistence.Persistence"%>
-<%@page import="javax.persistence.EntityManager"%>
-<%@page import="javax.persistence.EntityManagerFactory"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%!
-    EntityManagerFactory emf;
-    EntityManager em;
-%>
 <%
-    emf = Persistence.createEntityManagerFactory("default");
-    em = emf.createEntityManager();
-
-    TypedQuery<Cliente> q;
-    q = em.createQuery("select c from Cliente c", Cliente.class);
-    List<Cliente> clientes = q.getResultList();
+    ClienteJpaController clienteDAO = new ClienteJpaController(JpaUtil.getEmf());
+  
+    List<Cliente> clientes = clienteDAO.findClienteEntities();
 %>
 <!DOCTYPE html>
 <html>

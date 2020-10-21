@@ -4,17 +4,11 @@
     Author     : Wilson Wolf Costa <wilson.w.costa@gmail.com>
 --%>
 
-<%@page import="javax.persistence.EntityManager"%>
-<%@page import="javax.persistence.EntityManagerFactory"%>
-<%@page import="javax.persistence.Persistence"%>
+<%@page import="controle.ClienteJpaController"%>
+<%@page import="controle.JpaUtil"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%!
-    EntityManagerFactory emf;
-    EntityManager em;
-%>
 <%
-    emf = Persistence.createEntityManagerFactory("default");
-    em = emf.createEntityManager();
+    ClienteJpaController clienteDAO = new ClienteJpaController(JpaUtil.getEmf());
 %>
 <!DOCTYPE html>
 <html>
@@ -27,10 +21,7 @@
         <jsp:setProperty name="cliente" property="id" />
         <jsp:setProperty name="cliente" property="nome" />
         <%
-            em.getTransaction().begin();
-            em.merge(cliente);
-            em.getTransaction().commit();
-            em.close();
+            clienteDAO.edit(cliente);
         %>
 
         <h1>Alteração feita</h1>
